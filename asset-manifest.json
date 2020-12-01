@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/ez-saver/static/js/main.550ba233.chunk.js",
-    "main.js.map": "/ez-saver/static/js/main.550ba233.chunk.js.map",
+    "main.js": "/ez-saver/static/js/main.f0fbaeda.chunk.js",
+    "main.js.map": "/ez-saver/static/js/main.f0fbaeda.chunk.js.map",
     "runtime-main.js": "/ez-saver/static/js/runtime-main.30c3b3f7.js",
     "runtime-main.js.map": "/ez-saver/static/js/runtime-main.30c3b3f7.js.map",
     "static/js/2.d2fe6ee0.chunk.js": "/ez-saver/static/js/2.d2fe6ee0.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.30c3b3f7.js",
     "static/js/2.d2fe6ee0.chunk.js",
-    "static/js/main.550ba233.chunk.js"
+    "static/js/main.f0fbaeda.chunk.js"
   ]
 }
