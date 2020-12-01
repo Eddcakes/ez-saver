@@ -38,13 +38,16 @@ export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
 
   return (
     <VStack spacing={4}>
-      <Text>Today is number {dayNumber}</Text>
-      <Text>
-        This is week {selectedWeek} total weeks {weeksThisYear}
-      </Text>
+      {savingMode === mode.day ? (
+        <Text>Today is number {dayNumber}</Text>
+      ) : (
+        <Text>
+          It is week {selectedWeek} out of {weeksThisYear}
+        </Text>
+      )}
       <Text>
         The amount to put away is {currencySymbol.symbol}
-        {todaysAmount}
+        {todaysAmount.toFixed(2)}
       </Text>
       <Grid
         gridTemplateColumns='1fr 2fr 1fr'
@@ -108,9 +111,9 @@ function runningTotal(current, max, reversed = false) {
 function todaysDeposit(current, max, reversed = false) {
   let value;
   if (!reversed) {
-    value = current.toFixed(2);
+    value = current;
   } else {
-    value = (max - current).toFixed(2);
+    value = max - current;
   }
   return value;
 }
