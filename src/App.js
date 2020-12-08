@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   ChakraProvider,
   Box,
@@ -7,33 +7,30 @@ import {
   Grid,
   theme,
   Text,
-} from '@chakra-ui/react';
-import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import isLeapYear from 'dayjs/plugin/isLeapYear';
-import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear';
-import dayOfYear from 'dayjs/plugin/dayOfYear';
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
+import { format } from "date-fns";
 
-import { ColorModeSwitcher } from './components/ColorModeSwitcher';
-import { Settings } from './components/Settings';
-import { Today } from './components/Today';
+import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
+import { DatePicker } from "./components/DatePicker";
+import { Settings } from "./components/Settings";
+import { Today } from "./components/Today";
 
 export const currencyCode = {
-  gbp: { symbol: '£', subunit: 'p', id: 1, name: 'gbp' },
-  usd: { symbol: '$', subunit: '¢', id: 2, name: 'usd' },
-  eur: { symbol: '€', subunit: 'c', id: 3, name: 'eur' },
+  gbp: { symbol: "£", subunit: "p", id: 1, name: "gbp" },
+  usd: { symbol: "$", subunit: "¢", id: 2, name: "usd" },
+  eur: { symbol: "€", subunit: "c", id: 3, name: "eur" },
 };
 
-export const mode = { day: 'day', week: 'week' };
-
-dayjs.extend(isLeapYear);
-dayjs.extend(isoWeeksInYear);
-dayjs.extend(dayOfYear);
-dayjs.extend(isoWeek);
+export const mode = { day: "day", week: "week" };
 
 function App() {
   //grab defaults from local storage
-  const [selectedDayjs, setSelectedDayjs] = useState(dayjs());
+  const date = new Date();
+  console.log(date);
+  console.log(format(date, "yyyy-MM-dd"));
+  const [selectedDate, setSelectedDate] = useState(format(date, "yyyy-MM-dd"));
   const [currency, setCurrency] = useState(currencyCode.gbp);
   const [savingMode, setSavingMode] = useState(mode.day);
   const [reversed, setReversed] = useState(false);
@@ -46,12 +43,12 @@ function App() {
 
   const handleReversed = () => setReversed(!reversed);
 
-  const handleDatePicker = (newDate) => setSelectedDayjs(newDate);
+  const handleDatePicker = (newDate) => setSelectedDate(newDate);
 
   return (
     <ChakraProvider theme={theme}>
-      <Box height='100vh' textAlign='center' fontSize='xl'>
-        <HStack spacing={8} justifyContent={'flex-end'} p={[4, 4, 4, 4]}>
+      <Box height="100vh" textAlign="center" fontSize="xl">
+        <HStack spacing={8} justifyContent={"flex-end"} p={[4, 4, 4, 4]}>
           <ColorModeSwitcher />
           <Settings
             handleCurrencyChange={handleCurrencyChange}
@@ -64,13 +61,23 @@ function App() {
         </HStack>
         <Grid p={3}>
           <VStack spacing={8}>
-            <Box h='10em' w='10em' bg='teal.500'>
-              Calendar
-              <Text>{selectedDayjs.format('YYYY-MM-DD')}</Text>
+            <Box h="10em" w="10em" bg="teal.500">
+              <FormControl>
+                <FormLabel htmlFor="pick-selected-date">
+                  Choose selected date
+                </FormLabel>
+                <DatePicker
+                  id="pick-selected-date"
+                  selectedDate={selectedDate}
+                  onChange={(cng) => console.log(cng)}
+                  inline={false}
+                />
+              </FormControl>
+              <Text>{selectedDate}</Text>
             </Box>
             <Today
               currencySymbol={currency}
-              selectedDayjs={selectedDayjs}
+              selectedDate={selectedDate}
               savingMode={savingMode}
               reversed={reversed}
             />

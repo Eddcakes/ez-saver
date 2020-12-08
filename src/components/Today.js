@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   VStack,
   Text,
@@ -7,17 +7,23 @@ import {
   Grid,
   GridItem,
   Fade,
-} from '@chakra-ui/react';
-import { FaCheck, FaUndo } from 'react-icons/fa';
+} from "@chakra-ui/react";
+import {
+  getDayOfYear,
+  getDaysInYear,
+  getISOWeeksInYear,
+  getISOWeekYear,
+} from "date-fns";
+import { FaCheck, FaUndo } from "react-icons/fa";
 
-import { mode } from '../App';
+import { mode } from "../App";
 
-export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
+export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
   const [added, setAdded] = useState(false);
-  const dayNumber = selectedDayjs.dayOfYear();
-  const selectedWeek = selectedDayjs.isoWeek();
-  const weeksThisYear = selectedDayjs.isoWeeksInYear();
-  const daysInYear = selectedDayjs.isLeapYear() ? 366 : 365;
+  const dayNumber = getDayOfYear(new Date(selectedDate)); //might have to be new Date(selectedDate)
+  const selectedWeek = getISOWeekYear(new Date(selectedDate));
+  const weeksThisYear = getISOWeeksInYear(new Date(selectedDate));
+  const daysInYear = getDaysInYear(new Date(selectedDate));
   let todaysTotal;
   let todaysAmount;
   switch (savingMode) {
@@ -50,16 +56,16 @@ export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
         {todaysAmount.toFixed(2)}
       </Text>
       <Grid
-        gridTemplateColumns='1fr 2fr 1fr'
-        gridTemplateRows='1fr'
+        gridTemplateColumns="1fr 2fr 1fr"
+        gridTemplateRows="1fr"
         gridTemplateAreas='". complete undo"'
       >
-        <GridItem gridArea='complete'>
+        <GridItem gridArea="complete">
           <Button
-            size='lg'
-            variant='outline'
-            aria-label='Complete today'
-            colorScheme='green'
+            size="lg"
+            variant="outline"
+            aria-label="Complete today"
+            colorScheme="green"
             leftIcon={<FaCheck />}
             disabled={added}
             onClick={() => setAdded(true)}
@@ -68,13 +74,13 @@ export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
           </Button>
         </GridItem>
         {added === true ? (
-          <GridItem gridArea='undo' alignSelf='center'>
+          <GridItem gridArea="undo" alignSelf="center">
             <Fade in={added}>
               <IconButton
-                size='md'
-                fontSize='lg'
+                size="md"
+                fontSize="lg"
                 aria-label={`Reset today's `}
-                colorScheme='green'
+                colorScheme="green"
                 icon={<FaUndo />}
                 onClick={() => setAdded(false)}
               />
