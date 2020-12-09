@@ -93,11 +93,11 @@
 }
 /* tiles */
 .current-theme-light .react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
+.current-theme-light .react-calendar__tile:enabled:focus {
   background-color: #e6e6e6;
 }
 .current-theme-dark .react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
+.current-theme-dark .react-calendar__tile:enabled:focus {
   background-color: #0d1016;
 }
 /*  */
