@@ -12,7 +12,7 @@ import {
   getDayOfYear,
   getDaysInYear,
   getISOWeeksInYear,
-  getISOWeekYear,
+  getISOWeek,
 } from "date-fns";
 import { FaCheck, FaUndo } from "react-icons/fa";
 
@@ -21,7 +21,7 @@ import { mode } from "../App";
 export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
   const [added, setAdded] = useState(false);
   const dayNumber = getDayOfYear(new Date(selectedDate)); //might have to be new Date(selectedDate)
-  const selectedWeek = getISOWeekYear(new Date(selectedDate));
+  const selectedWeek = getISOWeek(new Date(selectedDate));
   const weeksThisYear = getISOWeeksInYear(new Date(selectedDate));
   const daysInYear = getDaysInYear(new Date(selectedDate));
   let todaysTotal;
@@ -43,7 +43,7 @@ export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
   }
 
   return (
-    <VStack spacing={4}>
+    <VStack>
       {savingMode === mode.day ? (
         <Text>Today is number {dayNumber}</Text>
       ) : (
@@ -56,16 +56,16 @@ export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
         {todaysAmount.toFixed(2)}
       </Text>
       <Grid
-        gridTemplateColumns="1fr 2fr 1fr"
-        gridTemplateRows="1fr"
+        gridTemplateColumns='1fr 2fr 1fr'
+        gridTemplateRows='1fr'
         gridTemplateAreas='". complete undo"'
       >
-        <GridItem gridArea="complete">
+        <GridItem gridArea='complete'>
           <Button
-            size="lg"
-            variant="outline"
-            aria-label="Complete today"
-            colorScheme="green"
+            size='lg'
+            variant='outline'
+            aria-label='Complete today'
+            colorScheme='green'
             leftIcon={<FaCheck />}
             disabled={added}
             onClick={() => setAdded(true)}
@@ -74,13 +74,13 @@ export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
           </Button>
         </GridItem>
         {added === true ? (
-          <GridItem gridArea="undo" alignSelf="center">
+          <GridItem gridArea='undo' alignSelf='center'>
             <Fade in={added}>
               <IconButton
-                size="md"
-                fontSize="lg"
+                size='md'
+                fontSize='lg'
                 aria-label={`Reset today's `}
-                colorScheme="green"
+                colorScheme='green'
                 icon={<FaUndo />}
                 onClick={() => setAdded(false)}
               />

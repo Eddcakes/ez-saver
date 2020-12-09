@@ -6,11 +6,10 @@ import {
   HStack,
   Grid,
   theme,
-  Text,
-  FormControl,
-  FormLabel,
+  Button,
 } from "@chakra-ui/react";
-import { format } from "date-fns";
+import { format, isSameMonth, isToday, parseISO, startOfMonth } from "date-fns";
+import { MdToday } from "react-icons/md";
 
 import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
 import { DatePicker } from "./components/DatePicker";
@@ -28,9 +27,10 @@ export const mode = { day: "day", week: "week" };
 function App() {
   //grab defaults from local storage
   const date = new Date();
-  console.log(date);
-  console.log(format(date, "yyyy-MM-dd"));
   const [selectedDate, setSelectedDate] = useState(format(date, "yyyy-MM-dd"));
+  const [calendarView, setCalendarView] = useState(
+    startOfMonth(new Date(selectedDate))
+  );
   const [currency, setCurrency] = useState(currencyCode.gbp);
   const [savingMode, setSavingMode] = useState(mode.day);
   const [reversed, setReversed] = useState(false);
@@ -43,11 +43,22 @@ function App() {
 
   const handleReversed = () => setReversed(!reversed);
 
-  const handleDatePicker = (newDate) => setSelectedDate(newDate);
+  const handleDatePicker = (newDate) => {
+    const nextDate = new Date(newDate);
+    setSelectedDate(format(nextDate, "yyyy-MM-dd"));
+    setCalendarView(startOfMonth(nextDate));
+  };
+  const handleShortWeekText = (locale = "en_GB", date) => {
+    // first two letters of weekday
+    return format(date, "EEEEEE");
+  };
+  const handleCalendarViewChange = ({ activeStartDate, value, view }) => {
+    setCalendarView(startOfMonth(activeStartDate));
+  };
 
   return (
     <ChakraProvider theme={theme}>
-      <Box height="100vh" textAlign="center" fontSize="xl">
+      <Box height='100vh' textAlign='center' fontSize='xl'>
         <HStack spacing={8} justifyContent={"flex-end"} p={[4, 4, 4, 4]}>
           <ColorModeSwitcher />
           <Settings
@@ -60,21 +71,29 @@ function App() {
           />
         </HStack>
         <Grid p={3}>
-          <VStack spacing={8}>
-            <Box h="10em" w="10em" bg="teal.500">
-              <FormControl>
-                <FormLabel htmlFor="pick-selected-date">
-                  Choose selected date
-                </FormLabel>
-                <DatePicker
-                  id="pick-selected-date"
-                  selectedDate={selectedDate}
-                  onChange={(cng) => console.log(cng)}
-                  inline={false}
-                />
-              </FormControl>
-              <Text>{selectedDate}</Text>
-            </Box>
+          <VStack spacing={4}>
+            {/* would i want min/max date to be this year or nah */}
+            <DatePicker
+              id='pick-selected-date'
+              selectedDate={selectedDate}
+              onChange={handleDatePicker}
+              formatShortWeekday={handleShortWeekText}
+              onActiveStartDateChange={handleCalendarViewChange}
+              activeStartDate={calendarView}
+            />
+            <Button
+              size='lg'
+              variant='outline'
+              aria-label='Set selected back to today'
+              leftIcon={<MdToday />}
+              disabled={
+                isSameMonth(calendarView, parseISO(selectedDate)) &&
+                isToday(parseISO(selectedDate))
+              }
+              onClick={() => handleDatePicker(new Date())}
+            >
+              Back to Today
+            </Button>
             <Today
               currencySymbol={currency}
               selectedDate={selectedDate}

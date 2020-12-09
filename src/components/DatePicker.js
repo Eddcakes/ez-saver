@@ -1,22 +1,21 @@
+import { useColorMode } from "@chakra-ui/react";
 import { parseISO } from "date-fns";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Calendar from "react-calendar";
+//import "react-calendar/dist/Calendar.css";
 
-// import "./DatePicker.css";
+// use my own styles to fit around chakra light/dark mode
+// https://github.com/wojtekmaj/react-calendar/issues/446
+import "./DatePicker.css";
 
-export function DatePicker({
-  selectedDate,
-  onChange,
-  isClearable = false,
-  showPopperArrow = false,
-  ...props
-}) {
+//calendarType="US" in order to start weeks with Sunday
+export function DatePicker({ selectedDate, onChange, inputRef, ...props }) {
+  const { colorMode } = useColorMode();
   return (
-    <ReactDatePicker
-      selected={parseISO(selectedDate)}
+    <Calendar
+      value={parseISO(selectedDate)}
       onChange={onChange}
-      isClearable={isClearable}
-      showPopperArrow={showPopperArrow}
+      calendarType='US'
+      className={`current-theme-${colorMode}`}
       {...props}
     />
   );
