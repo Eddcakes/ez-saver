@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   VStack,
   Text,
@@ -7,17 +7,23 @@ import {
   Grid,
   GridItem,
   Fade,
-} from '@chakra-ui/react';
-import { FaCheck, FaUndo } from 'react-icons/fa';
+} from "@chakra-ui/react";
+import {
+  getDayOfYear,
+  getDaysInYear,
+  getISOWeeksInYear,
+  getISOWeek,
+} from "date-fns";
+import { FaCheck, FaUndo } from "react-icons/fa";
 
-import { mode } from '../App';
+import { mode } from "../App";
 
-export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
+export function Today({ currencySymbol, selectedDate, savingMode, reversed }) {
   const [added, setAdded] = useState(false);
-  const dayNumber = selectedDayjs.dayOfYear();
-  const selectedWeek = selectedDayjs.isoWeek();
-  const weeksThisYear = selectedDayjs.isoWeeksInYear();
-  const daysInYear = selectedDayjs.isLeapYear() ? 366 : 365;
+  const dayNumber = getDayOfYear(new Date(selectedDate)); //might have to be new Date(selectedDate)
+  const selectedWeek = getISOWeek(new Date(selectedDate));
+  const weeksThisYear = getISOWeeksInYear(new Date(selectedDate));
+  const daysInYear = getDaysInYear(new Date(selectedDate));
   let todaysTotal;
   let todaysAmount;
   switch (savingMode) {
@@ -37,7 +43,7 @@ export function Today({ currencySymbol, selectedDayjs, savingMode, reversed }) {
   }
 
   return (
-    <VStack spacing={4}>
+    <VStack>
       {savingMode === mode.day ? (
         <Text>Today is number {dayNumber}</Text>
       ) : (
