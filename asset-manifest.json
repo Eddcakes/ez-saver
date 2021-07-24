@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/ez-saver/static/css/main.6099d6bd.chunk.css",
-    "main.js": "/ez-saver/static/js/main.5f1243b0.chunk.js",
-    "main.js.map": "/ez-saver/static/js/main.5f1243b0.chunk.js.map",
-    "runtime-main.js": "/ez-saver/static/js/runtime-main.1aff2446.js",
-    "runtime-main.js.map": "/ez-saver/static/js/runtime-main.1aff2446.js.map",
-    "static/js/2.f24c2eea.chunk.js": "/ez-saver/static/js/2.f24c2eea.chunk.js",
-    "static/js/2.f24c2eea.chunk.js.map": "/ez-saver/static/js/2.f24c2eea.chunk.js.map",
-    "static/js/3.188fc0eb.chunk.js": "/ez-saver/static/js/3.188fc0eb.chunk.js",
-    "static/js/3.188fc0eb.chunk.js.map": "/ez-saver/static/js/3.188fc0eb.chunk.js.map",
+    "main.js": "/ez-saver/static/js/main.0fff20f1.chunk.js",
+    "main.js.map": "/ez-saver/static/js/main.0fff20f1.chunk.js.map",
+    "runtime-main.js": "/ez-saver/static/js/runtime-main.dd61638d.js",
+    "runtime-main.js.map": "/ez-saver/static/js/runtime-main.dd61638d.js.map",
+    "static/js/2.10b308b0.chunk.js": "/ez-saver/static/js/2.10b308b0.chunk.js",
+    "static/js/2.10b308b0.chunk.js.map": "/ez-saver/static/js/2.10b308b0.chunk.js.map",
+    "static/js/3.ab5d4941.chunk.js": "/ez-saver/static/js/3.ab5d4941.chunk.js",
+    "static/js/3.ab5d4941.chunk.js.map": "/ez-saver/static/js/3.ab5d4941.chunk.js.map",
     "index.html": "/ez-saver/index.html",
     "static/css/main.6099d6bd.chunk.css.map": "/ez-saver/static/css/main.6099d6bd.chunk.css.map",
-    "static/js/2.f24c2eea.chunk.js.LICENSE.txt": "/ez-saver/static/js/2.f24c2eea.chunk.js.LICENSE.txt"
+    "static/js/2.10b308b0.chunk.js.LICENSE.txt": "/ez-saver/static/js/2.10b308b0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1aff2446.js",
-    "static/js/2.f24c2eea.chunk.js",
+    "static/js/runtime-main.dd61638d.js",
+    "static/js/2.10b308b0.chunk.js",
     "static/css/main.6099d6bd.chunk.css",
-    "static/js/main.5f1243b0.chunk.js"
+    "static/js/main.0fff20f1.chunk.js"
   ]
 }
