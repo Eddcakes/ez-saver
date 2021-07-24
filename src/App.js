@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChakraProvider,
   Box,
@@ -31,14 +31,19 @@ function App() {
   const [calendarView, setCalendarView] = useState(
     startOfMonth(new Date(selectedDate))
   );
-  const [currency, setCurrency] = useState(currencyCode.gbp);
-  const [savingMode, setSavingMode] = useState(mode.day);
-  const [reversed, setReversed] = useState(false);
+  const [currency, setCurrency] = useState(
+    JSON.parse(localStorage.getItem("ezCurrency")) || currencyCode.gbp
+  );
+  const [savingMode, setSavingMode] = useState(
+    localStorage.getItem("ezSavingMode") || mode.day
+  );
+  const [reversed, setReversed] = useState(
+    JSON.parse(localStorage.getItem("ezReversed")) ?? false
+  );
 
   const handleCurrencyChange = (newSymbol) => {
     setCurrency(currencyCode[`${newSymbol}`]);
   };
-
   const handleSavingMode = (newSavingMode) => setSavingMode(newSavingMode);
 
   const handleReversed = () => setReversed(!reversed);
@@ -55,6 +60,18 @@ function App() {
   const handleCalendarViewChange = ({ activeStartDate, value, view }) => {
     setCalendarView(startOfMonth(activeStartDate));
   };
+
+  useEffect(() => {
+    localStorage.setItem("ezCurrency", JSON.stringify(currency));
+  }, [currency]);
+
+  useEffect(() => {
+    localStorage.setItem("ezSavingMode", savingMode);
+  }, [savingMode]);
+
+  useEffect(() => {
+    localStorage.setItem("ezReversed", reversed);
+  }, [reversed]);
 
   return (
     <ChakraProvider theme={theme}>
