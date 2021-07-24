@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IconButton,
   Drawer,
@@ -16,11 +16,11 @@ import {
   Switch,
   Button,
   Text,
-} from '@chakra-ui/react';
-import { FaCog } from 'react-icons/fa';
-import { CgExport } from 'react-icons/cg';
+} from "@chakra-ui/react";
+import { FaCog } from "react-icons/fa";
+import { CgExport } from "react-icons/cg";
 
-import { currencyCode, mode } from '../App';
+import { currencyCode, mode } from "../App";
 
 export function Settings({
   handleCurrencyChange,
@@ -103,6 +103,7 @@ export function Settings({
                   </Text>
                   <Switch
                     id='reversed'
+                    aria-label='reverse size of deposits'
                     isChecked={reversed}
                     onChange={handleReversed}
                     size='lg'
