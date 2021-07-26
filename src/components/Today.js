@@ -119,7 +119,7 @@ function todaysDeposit(current, max, reversed = false) {
   if (!reversed) {
     value = current;
   } else {
-    value = max - current;
+    value = max - (current - 1);
   }
   return value;
 }
