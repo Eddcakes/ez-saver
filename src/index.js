@@ -5,12 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ColorModeScript />
     <App />
-  </StrictMode>,
-  document.getElementById("root")
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
